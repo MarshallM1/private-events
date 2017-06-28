@@ -1,0 +1,39 @@
+<h1><%= @event.title %></h1>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2" id="event_view">
+    <p><%= @event.description %></p>
+    <h6>Hosted by: <%=@event.host.name%></h6>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-5">
+      <% if logged_in? && @event.host_id != current_user.id %>
+        <%= form_for(current_user.attendees.build(attended_event_id: @event_id)) do |f| %>
+          <%= f.hidden_field :attended_event_id, value: @event.id %>
+          <%= f.submit 'Attend', class: 'btn btn-small btn-primary' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-3">
+      <h4>Date</h4>
+      <%= @event.date %>
+    </div>
+    <div class="col-md-2">
+      <h4>Location</h4>
+      <%= @event.location %>
+    </div>
+    <div class="col-md-2">
+      <h4>Attending</h4>
+      <ul>
+        <% @event.guests.each do |guest| %>
+          <li>
+            <%= link_to guest.name, guest %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

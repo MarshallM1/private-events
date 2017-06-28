@@ -1,0 +1,8 @@
+<a href= <%= event_path(event.id) %> class="list-group-item">
+	<h4 class="list-group-item-heading"> <%= event.title %> </h4>
+	<p class="list-group-item-text">Location: <%= event.location %></p>
+	<p class="list-group-item-text"><%= event.description %></p>
+	<p class="list-group-item-text">
+		Hosted By: <%=event.host.name%> on <%= event.date %>
+	</p>
+</a>
